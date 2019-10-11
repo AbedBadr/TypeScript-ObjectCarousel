@@ -1,4 +1,5 @@
 import { ICar } from "./car";
+import { ITeacher } from "./Teacher";
 
 let car1: ICar = {
     make: "Audi", model: "A4",
@@ -18,7 +19,33 @@ let car3: ICar = {
     year: 2018, price: 120000
 };
 
+let teacher1: ITeacher = {
+    name: "John Doe", subject: "Computer Science", salary: 35000,
+    pictureUrl: "https://www.bootdey.com/img/Content/avatar/avatar1.png"
+};
+
+let teacher2: ITeacher = {
+    name: "Jane Doe", subject: "English", salary: 25000,
+    pictureUrl: "https://cdn.thedailymash.co.uk/wp-content/uploads/20190324205050/teacher-gives-finger-667x375.jpg"
+};
+
+let teachers: ITeacher[] = [teacher1, teacher2];
+
 let cars: ICar[] = [car1, car2, car3];
+
+function showTeacher(teacher: ITeacher): void {
+    let div1: HTMLDivElement = <HTMLDivElement>document.getElementById("div1");
+    let div2: HTMLDivElement = <HTMLDivElement>document.getElementById("div2");
+    let div3: HTMLDivElement = <HTMLDivElement>document.getElementById("div3");
+    let div4: HTMLDivElement = <HTMLDivElement>document.getElementById("div4");
+    let div5: HTMLDivElement = <HTMLDivElement>document.getElementById("div5");
+    div1.innerHTML = "Name: " + teacher.name;
+    div2.innerHTML = "Subject: " + teacher.subject;
+    let pictureElement: string = "<img src=' " + teacher.pictureUrl + "' alt='teacher' height='50%' width='50%'/>";
+    console.log(pictureElement);
+    div3.innerHTML = pictureElement;
+    div4.innerHTML = "Salary: " + teacher.salary;
+}
 
 function showCar(car: ICar): void {
     let div1: HTMLDivElement = <HTMLDivElement>document.getElementById("div1");
@@ -41,13 +68,15 @@ showCar(cars[index]);
 let leftButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("leftButton");
 let rightButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("rightButton");
 leftButton.addEventListener("click", () => {
-    index--;
-    if (index < 0) { index = cars.length - 1; }
+    if (index > 0)
+        index--;
+    //if (index < 0) { leftButton.disabled;/*index = cars.length - 1;*/ }
     showCar(cars[index]);
 });
 
 rightButton.addEventListener("click", () => {
-    index++;
-    if (index === cars.length) { index = 0; }
+    if (index < cars.length-1)
+        index++;
+    if (index === cars.length) { rightButton.disabled; }
     showCar(cars[index]);
 });
